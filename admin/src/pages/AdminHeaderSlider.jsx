@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 
-const ADMIN_API = "http://localhost:5000/api/header-slides/admin";
-const BASE_API = "http://localhost:5000/api/header-slides";
+const ADMIN_API = `${process.env.REACT_APP_API_URL}/api/header-slides/admin`;
+const BASE_API = `${process.env.REACT_APP_API_URL}/api/header-slides`;
 
 export default function AdminHeaderSlider() {
   const [slides, setSlides] = useState([]);

@@ -4,8 +4,8 @@ import Navbar from "../components/Navbar";
 import { MdEditSquare } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 
-const API = "http://localhost:5000/api/products";
-const COLLECTION_API = "http://localhost:5000/api/collections";
+const API = `${process.env.REACT_APP_API_URL}/api/products`;
+const COLLECTION_API = `${process.env.REACT_APP_API_URL}/api/collections`;
 
 export default function AdminProducts() {
   const [allProducts, setAllProducts] = useState([]);

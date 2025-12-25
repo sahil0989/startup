@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 
-const API = "http://localhost:5000/api/collections";
+const API = `${process.env.REACT_APP_API_URL}/api/collections`;
 
 export default function AdminCollections() {
 

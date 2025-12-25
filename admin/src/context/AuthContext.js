@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/admin/check-auth", { withCredentials: true });
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/admin/check-auth`, { withCredentials: true });
         setIsAuthenticated(response.status === 200);
       } catch (error) {
         setIsAuthenticated(false);
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
   // 2. Fetch Collections (Centralized)
   const fetchCollections = useCallback(async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/collections", { withCredentials: true });
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/collections`, { withCredentials: true });
       setCollections(res.data);
     } catch (err) {
       console.error("Collections fetch failed", err);
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
   const fetchProducts = useCallback(async (params = {}) => {
     try {
       setLoadingData(true);
-      const res = await axios.get("http://localhost:5000/api/products", { 
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/products`, { 
         params, 
         withCredentials: true 
       });

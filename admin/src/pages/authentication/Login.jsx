@@ -19,7 +19,7 @@ export default function Login() {
 
         try {
             const response = await axios.post(
-                "http://localhost:5000/api/admin/login", // Use your backend URL
+                `${process.env.REACT_APP_API_URL}/api/admin/login`, // Use your backend URL
                 { email, password },
                 { withCredentials: true }
             );
