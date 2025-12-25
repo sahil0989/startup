@@ -1,0 +1,53 @@
+@tailwind base; 
+@tailwind components; 
+@tailwind utilities;
+
+/* @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Kalam', cursive;
+} */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+body {
+    font-family: 'Patrick Hand', cursive;
+} */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap');
+
+body {
+    font-family: cursive;
+} */
+
+
+/* Restart animation on every active state */
+.swiper-pagination-bullet-active {
+  width: 46px !important;
+  height: 6px !important;
+  border-radius: 9999px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background: rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Animated fill bar */
+.swiper-pagination-bullet-active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  height: 100%;
+  background: white;
+  animation: fillLine 3s linear forwards; /* same as autoplay delay */
+}
+
+/* Keyframe — filling from left to right */
+@keyframes fillLine {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
