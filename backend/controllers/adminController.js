@@ -7,7 +7,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "SUPER_SECRET_KEY";
 // ONE TIME ADMIN REGISTER
 export const registerAdmin = async (req, res) => {
   const { email, password } = req.body;
- 
+
   try {
     const adminExists = await Admin.findOne();
     if (adminExists) return res.status(403).send("Admin already exists");
@@ -37,8 +37,9 @@ export const loginAdmin = async (req, res) => {
 
     res.cookie("authToken", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      secure: true,        // ✅ ALWAYS true on Render
+      sameSite: "none",    // ✅ REQUIRED for Vercel → Render
+      maxAge: 60 * 60 * 1000
     });
 
     res.status(200).json({ message: "Login successful" });
@@ -49,7 +50,11 @@ export const loginAdmin = async (req, res) => {
 
 // LOGOUT
 export const logoutAdmin = (req, res) => {
-  res.clearCookie("authToken", { httpOnly: true, sameSite: "strict" });
+  res.clearCookie("authToken", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
   res.send("Logout successful");
 };
 
