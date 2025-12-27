@@ -67,7 +67,7 @@ export default function CategoriesPage() {
     }, [id, collections, allProducts]);
 
     if (!categoryData)
-        return <p className="text-center py-16">Loading Collection...</p>;
+        return <Loader />;
 
     // Pagination
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);

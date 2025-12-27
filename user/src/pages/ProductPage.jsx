@@ -21,6 +21,7 @@ export default function ProductPage() {
         }
     }, [id, allProducts]);
 
+    if (!productData) return <Loader />;
 
     // Calculate discount
     const discount = Math.round(
@@ -31,7 +32,6 @@ export default function ProductPage() {
         return <Loader />;
     }
 
-    if (!productData) return <p className="text-center py-16">Loading product...</p>;
 
     return (
         <>
