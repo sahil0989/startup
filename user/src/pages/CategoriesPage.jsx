@@ -5,10 +5,11 @@ import { useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useEffect, useMemo, useState } from 'react';
 import { MdSearch } from "react-icons/md";
+import Loader from '../components/Loader';
 
 export default function CategoriesPage() {
     const { id } = useParams();
-    const { allProducts, collections } = useAuth();
+    const { allProducts, collections, loadingData } = useAuth();
 
     const [categoryData, setCategoryData] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
@@ -73,6 +74,10 @@ export default function CategoriesPage() {
     const start = (currentPage - 1) * productsPerPage;
     const currentProducts = filteredProducts.slice(start, start + productsPerPage);
 
+    if (loadingData) {
+        return <Loader />;
+    }
+
     return (
         <>
             <Navbar />
@@ -94,15 +99,15 @@ export default function CategoriesPage() {
                 <h2 className="text-2xl font-bold mb-6">Products in {categoryData.name}</h2>
 
                 {/* Search + Sort */}
-                <div className="mt-10 flex items-center justify-end gap-4">
+                <div className="mt-10 flex items-center justify-between md:justify-end gap-4">
 
                     {/* Search Bar */}
-                    <form className="hidden md:flex items-center bg-gray-100 px-3 py-1.5 rounded-lg">
+                    <form className="flex items-center bg-gray-100 px-3 py-1.5 rounded-lg">
                         <MdSearch size={20} className="text-gray-500 mr-2" />
                         <input
                             type="text"
                             placeholder="Search..."
-                            className="bg-transparent outline-none text-sm w-24 py-1 focus:w-60 transition-all"
+                            className="bg-transparent outline-none text-sm w-24 py-1 focus:w-36 md:focus:w-60 transition-all"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -125,7 +130,7 @@ export default function CategoriesPage() {
                 {/* Products */}
                 {currentProducts.length > 0 ? (
                     <>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
                             {currentProducts.map((product) => (
                                 <ProductCard key={product.id} product={product} />
                             ))}

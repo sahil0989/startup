@@ -30,7 +30,7 @@ export default function Categories() {
                             Explore our wide range of categories crafted to suit your needs.
                         </p>
                     </div>
-                    <div className="w-full flex justify-end items-center h-24">
+                    <div className="w-full hidden md:flex justify-end items-center h-24">
                         <Link to="/all_collections" className="px-4 py-2 text-xs bg-black text-white rounded-md hover:bg-gray-800 duration-200">
                             See More
                         </Link>
@@ -57,6 +57,12 @@ export default function Categories() {
                             </h3>
                         </Link>
                     ))}
+                </div>
+
+                <div className="w-full md:hidden flex justify-center items-center h-24">
+                    <Link to="/all_collections" className="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800 duration-200">
+                        See More
+                    </Link>
                 </div>
             </div>
         </div>

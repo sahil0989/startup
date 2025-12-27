@@ -1,8 +1,17 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
+import Loader from "../components/Loader";
+import { useAuth } from "../context/AuthContext";
 
 export default function AboutUs() {
+
+    const { loadingData } = useAuth();
+
+    if (loadingData) {
+        return <Loader />;
+    }
+
     return (
         <>
             <Navbar />

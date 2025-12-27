@@ -3,9 +3,17 @@ import FAQ from "../components/FAQ";
 import FeaturedProducts from "../components/FeaturedProducts";
 import Footer from "../components/Footer";
 import HeaderSlider from "../components/HeaderSlider";
+import Loader from "../components/Loader";
 import Navbar from "../components/Navbar";
+import { useAuth } from "../context/AuthContext";
 
 export default function Home() {
+
+    const { loadingData } = useAuth();
+
+    if (loadingData) {
+        return <Loader />;
+    }
 
     return (
         <>

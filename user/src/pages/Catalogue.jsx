@@ -4,10 +4,11 @@ import { MdSearch } from "react-icons/md";
 import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
 import { useAuth } from "../context/AuthContext";
+import Loader from "../components/Loader";
 
 export default function Catalogue() {
 
-    const { allProducts } = useAuth();
+    const { allProducts, loadingData } = useAuth();
 
     const categories = [
         "All",
@@ -77,8 +78,11 @@ export default function Catalogue() {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        console.log("Search:", searchQuery);
     };
+
+    if (loadingData) {
+        return <Loader />;
+    }
 
     return (
         <>
@@ -96,7 +100,7 @@ export default function Catalogue() {
                     </header>
 
                     {/* Filters & Sorting */}
-                    <div className="mt-10 sm:flex sm:items-center sm:justify-between gap-4">
+                    <div className="mt-10 flex items-center justify-between gap-4">
                         {/* Category */}
                         <select
                             value={category}
@@ -140,8 +144,23 @@ export default function Catalogue() {
                         </div>
                     </div>
 
+                    <form
+                        onSubmit={handleSearch}
+                        className="flex mt-5 md:hidden items-center bg-gray-100 px-3 py-1.5 rounded-lg transition-all duration-300 focus-within:shadow-md"
+                    >
+                        <MdSearch size={20} className="text-gray-500 mr-2" />
+
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            className="bg-transparent outline-none text-sm w-24 py-1 focus:w-60 transition-all duration-300"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                    </form>
+
                     {/* Product Grid */}
-                    <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    <ul className="mt-8 grid gap-6 grid-cols-2 lg:grid-cols-4">
                         {paginatedProducts.length > 0 ? (
                             paginatedProducts.map((product) => (
                                 <li key={product.id} className="transition hover:-translate-y-1">

@@ -3,15 +3,20 @@ import Footer from '../components/Footer'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext';
 import { useEffect, useState } from 'react';
+import Loader from '../components/Loader';
 
 export default function AllCategories() {
 
-    const { collections } = useAuth();
+    const { collections, loadingData } = useAuth();
     const [collectionData, setCollectionData] = useState([]);
 
     useEffect(() => {
         setCollectionData(collections);
     }, [collections])
+
+    if (loadingData) {
+        return <Loader />;
+    }
 
     return (
         <>

@@ -3,8 +3,13 @@ import Footer from "../components/Footer";
 import { Toaster, toast } from "sonner";
 import { useState } from "react";
 import axios from "axios";
+import { useAuth } from "../context/AuthContext";
+import Loader from "../components/Loader";
 
 export default function ContactUs() {
+
+    const { loadingData } = useAuth();
+
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -38,6 +43,10 @@ export default function ContactUs() {
             );
         }
     };
+
+    if (loadingData) {
+        return <Loader />;
+    }
 
     return (
         <>

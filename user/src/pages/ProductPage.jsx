@@ -7,29 +7,31 @@ import { Toaster, toast } from "sonner";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
+import Loader from "../components/Loader";
 
 export default function ProductPage() {
     const { id } = useParams();
-    const { allProducts } = useAuth();
+    const { allProducts, loadingData } = useAuth();
     const [productData, setProductData] = useState(null);
-
-    console.log(allProducts)
-    console.log(id)
 
     useEffect(() => {
         if (allProducts && id) {
             const product = allProducts.find((p) => p._id === id);
-            console.log(product)
             setProductData(product || null);
         }
     }, [id, allProducts]);
 
-    if (!productData) return <p className="text-center py-16">Loading product...</p>;
 
     // Calculate discount
     const discount = Math.round(
         ((productData.originalPrice - productData.discountedPrice) / productData.originalPrice) * 100
     );
+
+    if (loadingData) {
+        return <Loader />;
+    }
+
+    if (!productData) return <p className="text-center py-16">Loading product...</p>;
 
     return (
         <>
@@ -84,7 +86,7 @@ export default function ProductPage() {
                         {/* Buy Button */}
                         <div className="flex gap-4 mt-6">
                             <a
-                                href="https://wa.me/919876543210?text=Hi%20I%20want%20to%20buy%20this%20product"
+                                href="https://wa.me/919813609829?text=Hi%20I%20want%20to%20buy%20this%20product"
                                 target="_blank"
                                 rel="noopener noreferrer">
                                 <button className="border border-black px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition">
@@ -100,10 +102,10 @@ export default function ProductPage() {
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Products</h2>
                     <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                         {allProducts
-                            .filter((p) => p.id !== productData.id)
+                            .filter((p) => p._id !== productData._id)
                             .slice(0, 8)
                             .map((item) => (
-                                <ProductCard key={item.id} product={item} />
+                                <ProductCard key={item._id} product={item} />
                             ))}
                     </ul>
                 </div>

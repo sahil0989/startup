@@ -6,7 +6,7 @@ export default function ProductCard({ product }) {
   );
 
   return (
-    <li>
+    <>
       <Link to={`/product/${product?._id || ""}`} className="group block">
         <div className="relative">
           <img
@@ -37,6 +37,6 @@ export default function ProductCard({ product }) {
           </div>
         </div>
       </Link>
-    </li>
+    </>
   );
 }
