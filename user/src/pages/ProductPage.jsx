@@ -103,7 +103,7 @@ export default function ProductPage() {
                     <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                         {allProducts
                             .filter((p) => p._id !== productData._id)
-                            .slice(0, 8)
+                            .slice(0, 4)
                             .map((item) => (
                                 <ProductCard key={item._id} product={item} />
                             ))}

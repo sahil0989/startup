@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function ProductImage({ product }) {
 
     const [activeImage, setActiveImage] = useState(product.images[0].url);
+
+    useEffect(() => {
+        setActiveImage(product.images[0].url);
+    }, [product])
 
     return (
         <>
